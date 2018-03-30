@@ -23,6 +23,7 @@ def set_new_username(user_names, user_name,file_name='usernames.json'):
 			json.dump(user_names,file_object)
 		return True
 	return False
+
 def check_username():
 	'''Find user or ask if set new user'''
 	user_name = input("What is your user name? ")
@@ -72,6 +73,7 @@ def print_all_completed_tasks(users_tasks):
 	for i in range(0,len(users_tasks)):
 		if users_tasks[i][1]:
 			print('\t' + str(i) +'\t'+ users_tasks[i][0])
+
 def print_all(users_tasks):
 	print("All tasks:")
 	print("\tID\tTask\tCompletion")
@@ -79,6 +81,7 @@ def print_all(users_tasks):
 		print('\t' + str(i) +
 			'\t' + users_tasks[i][0] + 
 			'\t' + str(users_tasks[i][1]))
+
 def print_new_tasks(new_tasks,start_id):
 	'''print all new tasks 
 	that need to be completed'''
@@ -99,13 +102,16 @@ def get_help():
 	for key, val in main_menu.items():
 		print(key, ' : ', val)
 	print()
+
 def mark_task(users_tasks, new_tasks):
+	'''gets user input for task id'''
 	task_id = input('What is the task id you want to mark as completed? ')
 	try:
 		val = int(task_id)
 		set_complete(val, users_tasks,new_tasks)
 	except ValueError:
 		print('That is not an int!')
+
 def get_users_tasks(user_name):
 	'''Get the stored tasks for this user'''
 	users_tasks = get_all_tasks()
@@ -160,24 +166,6 @@ def run_tasks(user_name):
 		elif(response != 'q'):
 			print('Command not recognized')
 	save_users_tasks(user_name, users_tasks)
-	'''users_tasks = []
-	new_tasks = []
-	first_task = Task("1 test")
-	users_tasks.append(first_task.get_task())
-	initial_shift = len(users_tasks)
-	print_all_current_tasks(users_tasks)
-	my_task = Task("a test")
-	set_task(users_tasks,new_tasks,my_task)
-	my_other_task = Task("what a nother task")
-	set_task(users_tasks,new_tasks,my_other_task)
-	my_done_task = Task("done", True)
-	set_task(users_tasks,new_tasks,my_done_task)
-	set_complete(1,users_tasks,new_tasks)
-	users_dict = {}
-	users_dict[user_name] = users_tasks
-	print_all_current_tasks(users_tasks)
-	print_all_completed_tasks(users_tasks)
-	print_new_tasks(new_tasks,initial_shift)'''
 
 if __name__ == '__main__':
 	user_name = check_username()
